@@ -57,6 +57,12 @@ p6df::modules::java::langs() {
       (
         cd $d
         jenv add ./Contents/Home
+	local plugins
+	local plugin
+	plugins=$(p6_dir_list "$P6_DFZ_SRC_DIR/gcuisinier/jenv/available-plugins")
+	for plugin in $(p6_echo $plugins); do
+	  jenv enable-plugin $plugin
+	done
       )
     done
   )
@@ -64,6 +70,7 @@ p6df::modules::java::langs() {
   jenv rehash
 
   # XXX: These use the base brew java
+  #  maven wrapper
   #  brew install maven
   #  brew install maven-completion
   #  brew install maven-shell
