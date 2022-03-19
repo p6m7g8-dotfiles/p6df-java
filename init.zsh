@@ -7,7 +7,7 @@
 ######################################################################
 p6df::modules::java::deps() {
   ModuleDeps=(
-    p6m7g8/p6common
+    p6m7g8-dotfiles/p6common
     gcuisinier/jenv
   )
 }
