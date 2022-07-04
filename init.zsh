@@ -30,6 +30,7 @@ p6df::modules::java::vscodes() {
 #
 # Function: p6df::modules::java::brew()
 #
+#  Depends:	 p6_file
 #>
 ######################################################################
 p6df::modules::java::brew() {
@@ -60,7 +61,7 @@ p6df::modules::java::home::symlink() {
 #
 # Function: p6df::modules::java::langs()
 #
-#  Environment:	 XXX
+#  Environment:	 P6_DFZ_SRC_DIR XXX
 #>
 ######################################################################
 p6df::modules::java::langs() {
@@ -101,6 +102,22 @@ p6df::modules::java::langs() {
 p6df::modules::java::init() {
 
   p6df::modules::java::jenv::init "$P6_DFZ_SRC_DIR"
+
+  p6df::modules::java::prompt::init
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::java::prompt::init()
+#
+#>
+######################################################################
+p6df::modules::java::prompt::init() {
+
+  p6df::core::prompt::line::add "p6_lang_prompt_info"
+  p6df::core::prompt::line::add "p6_lang_envs_prompt_info"
+  p6df::core::prompt::lang::line::add j
 }
 
 ######################################################################
@@ -129,43 +146,22 @@ p6df::modules::java::jenv::init() {
     eval "$(p6_run_code jenv init - zsh)"
   fi
 }
+
 ######################################################################
 #<
 #
-# Function: p6df::modules::java::jenv::prompt::line()
+# Function: str str = p6_j_env_prompt_info()
 #
-#  Depends:	 p6_echo
+#  Returns:
+#	str - str
+#
 #  Environment:	 JAVA_HOME JENV_ROOT
 #>
 ######################################################################
-p6df::modules::java::jenv::prompt::line() {
+p6_j_env_prompt_info() {
 
-  p6_echo "jenv:\t  jenv_root=$JENV_ROOT
-jenv:\t  java_home=$JAVA_HOME"
-}
+  local str="jenv_root=$JENV_ROOT
+java_home=$JAVA_HOME"
 
-######################################################################
-#<
-#
-# Function: p6df::modules::java::prompt::line()
-#
-#>
-######################################################################
-p6df::modules::java::prompt::line() {
-
-  p6_java_prompt_info
-}
-
-######################################################################
-#<
-#
-# Function: p6_java_prompt_info()
-#
-#  Depends:	 p6_lang
-#>
-######################################################################
-p6_java_prompt_info() {
-
-  echo -n "j:\t  "
-  p6_lang_version "j"
+  p6_return_str "$str"
 }
