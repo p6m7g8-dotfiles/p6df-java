@@ -141,7 +141,7 @@ p6df::modules::java::jenv::init() {
   if [ -x $JENV_ROOT/bin/jenv ]; then
     export JENV_ROOT
     export HAS_JAENV=1
-    p6df::util::path_if $JENV_ROOT/bin
+    p6_path_if $JENV_ROOT/bin
 
     eval "$(p6_run_code jenv init - zsh)"
   fi
