@@ -160,8 +160,8 @@ p6df::modules::java::jenv::init() {
 ######################################################################
 p6_j_env_prompt_info() {
 
-  local str="jenv_root=$JENV_ROOT
-java_home=$JAVA_HOME"
+  local str="jenv_root:\t  $JENV_ROOT
+java_home:\t  $JAVA_HOME"
 
   p6_return_str "$str"
 }
