@@ -28,12 +28,11 @@ p6df::modules::java::vscodes() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::java::brew()
+# Function: p6df::modules::java::external::brew()
 #
-#  Depends:	 p6_file
 #>
 ######################################################################
-p6df::modules::java::brew() {
+p6df::modules::java::external::brew() {
 
   brew tap adoptopenjdk/openjdk
   local ver
@@ -47,7 +46,6 @@ p6df::modules::java::brew() {
 #
 # Function: p6df::modules::java::home::symlink()
 #
-#  Depends:	 p6_file
 #  Environment:	 P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
 ######################################################################
@@ -61,34 +59,58 @@ p6df::modules::java::home::symlink() {
 #
 # Function: p6df::modules::java::langs()
 #
-#  Environment:	 P6_DFZ_SRC_DIR XXX
+#  Environment:	 P6_DFZ_SRC_DIR
 #>
 ######################################################################
 p6df::modules::java::langs() {
 
-  (
-    cd /Library/Java/JavaVirtualMachines/
-    for d in *; do
-      (
-        cd $d
-        jenv add ./Contents/Home
-	local plugins
-	local plugin
-	plugins=$(p6_dir_list "$P6_DFZ_SRC_DIR/gcuisinier/jenv/available-plugins")
-	for plugin in $(p6_echo $plugins); do
-	  jenv enable-plugin $plugin
-	done
-      )
-    done
-  )
-  jenv global 16.0
+  p6_run_dir "/Library/Java/JavaVirtualMachines/" p6df::modules::java::langs::doit
+
+  jenv global 16.0.1
   jenv rehash
+
+  local plugins
+  local plugin
+  plugins=$(p6_dir_list "$P6_DFZ_SRC_DIR/gcuisinier/jenv/available-plugins")
+  for plugin in $(p6_echo $plugins); do
+    jenv enable-plugin $plugin
+  done
+
+  jenv rehash
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::java::langs::doit()
+#
+#  Environment:	 XXX
+#>
+######################################################################
+p6df::modules::java::langs::doit() {
+
+  local d
+  for d in *; do
+    p6_run_dir "$d" p6df::modules::java::langs::jenv::add
+  done
 
   # XXX: These use the base brew java
   #  maven wrapper
   #  brew install maven
   #  brew install maven-completion
   #  brew install maven-shell
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::java::langs::jenv::add()
+#
+#>
+######################################################################
+p6df::modules::java::langs::jenv::add() {
+
+  jenv add ./Contents/Home
 }
 
 ######################################################################
