@@ -23,6 +23,12 @@ p6df::modules::java::vscodes() {
 
   # sonarlint
   code --install-extension SonarSource.sonarlint-vscode
+  code --install-extensionredhat.java
+  code --install-extensionvscjava.vscode-java-debug
+  code --install-extensionvscjava.vscode-java-dependency
+  code --install-extensionvscjava.vscode-java-pack
+  code --install-extensionvscjava.vscode-java-test
+  code --install-extensionvscjava.vscode-maven
 }
 
 ######################################################################
