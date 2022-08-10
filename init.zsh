@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 ######################################################################
 #<
 #
@@ -29,6 +30,8 @@ p6df::modules::java::vscodes() {
   code --install-extensionvscjava.vscode-java-pack
   code --install-extensionvscjava.vscode-java-test
   code --install-extensionvscjava.vscode-maven
+
+  p6_return_void
 }
 
 ######################################################################
@@ -45,6 +48,8 @@ p6df::modules::java::external::brew() {
   for ver in 8 9 10 11 12 13 14 15 16; do
     brew install --cask adoptopenjdk/openjdk/adoptopenjdk${ver}
   done
+
+  p6_return_void
 }
 
 ######################################################################
@@ -58,6 +63,8 @@ p6df::modules::java::external::brew() {
 p6df::modules::java::home::symlink() {
 
   p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-java/share/.sonarlint" ".sonarlint"
+
+  p6_return_void
 }
 
 ######################################################################
@@ -83,6 +90,8 @@ p6df::modules::java::langs() {
   done
 
   jenv rehash
+
+  p6_return_void
 }
 
 ######################################################################
@@ -105,6 +114,8 @@ p6df::modules::java::langs::doit() {
   #  brew install maven
   #  brew install maven-completion
   #  brew install maven-shell
+
+  p6_return_void
 }
 
 ######################################################################
@@ -117,6 +128,8 @@ p6df::modules::java::langs::doit() {
 p6df::modules::java::langs::jenv::add() {
 
   jenv add ./Contents/Home
+
+  p6_return_void
 }
 
 ######################################################################
@@ -132,6 +145,33 @@ p6df::modules::java::init() {
   p6df::modules::java::jenv::init "$P6_DFZ_SRC_DIR"
 
   p6df::modules::java::prompt::init
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::java::jenv::init(dir)
+#
+#  Args:
+#	dir -
+#
+#  Environment:	 HAS_JENV JENV_ROOT P6_DFZ_LANGS_DISABLE
+#>
+######################################################################
+p6df::modules::java::jenv::init() {
+  local dir="$1"
+
+  local JENV_ROOT=$dir/gcuisinier/jenv
+  if p6_string_blank "$P6_DFZ_LANGS_DISABLE" && p6_file_executable "$JENV_ROOT/bin/jenv"; then
+    p6_env_export JENV_ROOT "$JENV_ROOT"
+    p6_env_export HAS_JENV 1
+    p6_path_if $JENV_ROOT/bin
+    eval "$(jenv init - zsh)"
+  fi
+
+  p6_return_void
 }
 
 ######################################################################
@@ -146,33 +186,6 @@ p6df::modules::java::prompt::init() {
   p6df::core::prompt::line::add "p6_lang_prompt_info"
   p6df::core::prompt::line::add "p6_lang_envs_prompt_info"
   p6df::core::prompt::lang::line::add j
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::java::jenv::init(dir)
-#
-#  Args:
-#	dir -
-#
-#  Environment:	 DISABLE_ENVS HAS_JAENV JENV_ROOT
-#>
-######################################################################
-p6df::modules::java::jenv::init() {
-  local dir="$1"
-
-  [ -n "$DISABLE_ENVS" ] && return
-
-  JENV_ROOT=$dir/gcuisinier/jenv
-
-  if [ -x $JENV_ROOT/bin/jenv ]; then
-    export JENV_ROOT
-    export HAS_JAENV=1
-    p6_path_if $JENV_ROOT/bin
-
-    eval "$(p6_run_code jenv init - zsh)"
-  fi
 }
 
 ######################################################################
