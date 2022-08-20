@@ -79,7 +79,8 @@ p6df::modules::java::langs() {
 
   p6_run_dir "/Library/Java/JavaVirtualMachines/" p6df::modules::java::langs::doit
 
-  jenv global 16.0.1
+  local latest_installed=$(p6df::modules::java::jenv::latest::installed)
+  jenv global $latest_installed
   jenv rehash
 
   local plugins
@@ -92,6 +93,18 @@ p6df::modules::java::langs() {
   jenv rehash
 
   p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::java::jenv::latest::installed()
+#
+#>
+######################################################################
+p6df::modules::java::jenv::latest::installed() {
+
+  jenv versions | p6_filter_exclude "openjdk" | sed -e 's, (.*,,' -e 's,\*,,' | p6_filter_last "1" | p6_filter_spaces_strip
 }
 
 ######################################################################
@@ -142,9 +155,7 @@ p6df::modules::java::langs::jenv::add() {
 ######################################################################
 p6df::modules::java::init() {
 
-  p6df::modules::java::jenv::init "$P6_DFZ_SRC_DIR"
-
-  p6df::modules::java::prompt::init
+  p6df::core::lang::mgr::init "$P6_DFZ_SRC_DIR/gcuisinier/jenv" "j"
 
   p6_return_void
 }
@@ -152,46 +163,7 @@ p6df::modules::java::init() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::java::jenv::init(dir)
-#
-#  Args:
-#	dir -
-#
-#  Environment:	 HAS_JENV JENV_ROOT P6_DFZ_LANGS_DISABLE
-#>
-######################################################################
-p6df::modules::java::jenv::init() {
-  local dir="$1"
-
-  local JENV_ROOT=$dir/gcuisinier/jenv
-  if p6_string_blank "$P6_DFZ_LANGS_DISABLE" && p6_file_executable "$JENV_ROOT/bin/jenv"; then
-    p6_env_export JENV_ROOT "$JENV_ROOT"
-    p6_env_export HAS_JENV 1
-    p6_path_if $JENV_ROOT/bin
-    eval "$(jenv init - zsh)"
-  fi
-
-  p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::java::prompt::init()
-#
-#>
-######################################################################
-p6df::modules::java::prompt::init() {
-
-  p6df::core::prompt::line::add "p6_lang_prompt_info"
-  p6df::core::prompt::line::add "p6_lang_envs_prompt_info"
-  p6df::core::prompt::lang::line::add j
-}
-
-######################################################################
-#<
-#
-# Function: str str = p6_j_env_prompt_info()
+# Function: str str = p6df::modules::j::env::prompt::info()
 #
 #  Returns:
 #	str - str
@@ -199,7 +171,7 @@ p6df::modules::java::prompt::init() {
 #  Environment:	 JAVA_HOME JENV_ROOT
 #>
 ######################################################################
-p6_j_env_prompt_info() {
+p6df::modules::j::env::prompt::info() {
 
   local str="jenv_root:\t  $JENV_ROOT
 java_home:\t  $JAVA_HOME"

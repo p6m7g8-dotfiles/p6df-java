@@ -48,13 +48,12 @@
 - p6df::modules::java::external::brew()
 - p6df::modules::java::home::symlink()
 - p6df::modules::java::init()
-- p6df::modules::java::jenv::init(dir)
+- p6df::modules::java::jenv::latest::installed()
 - p6df::modules::java::langs()
 - p6df::modules::java::langs::doit()
 - p6df::modules::java::langs::jenv::add()
-- p6df::modules::java::prompt::init()
 - p6df::modules::java::vscodes()
-- str str = p6_j_env_prompt_info()
+- str str = p6df::modules::j::env::prompt::info()
 
 
 
