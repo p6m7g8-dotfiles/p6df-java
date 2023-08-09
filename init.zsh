@@ -22,7 +22,6 @@ p6df::modules::java::deps() {
 ######################################################################
 p6df::modules::java::vscodes() {
 
-  # sonarlint
   code --install-extension SonarSource.sonarlint-vscode
   code --install-extensionredhat.java
   code --install-extensionvscjava.vscode-java-debug
@@ -48,6 +47,8 @@ p6df::modules::java::external::brew() {
   for ver in 8 9 10 11 12 13 14 15 16; do
     brew install --cask adoptopenjdk/openjdk/adoptopenjdk${ver}
   done
+
+  brew install temurin --cask
 
   p6_return_void
 }
