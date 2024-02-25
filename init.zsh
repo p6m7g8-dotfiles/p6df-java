@@ -10,6 +10,7 @@ p6df::modules::java::deps() {
   ModuleDeps=(
     p6m7g8-dotfiles/p6common
     gcuisinier/jenv
+    ohmyzsh/ohmyzsh:plugins/mvn
   )
 }
 
@@ -38,17 +39,22 @@ p6df::modules::java::vscodes() {
 #
 # Function: p6df::modules::java::external::brew()
 #
+#  Environment:	 XXX
 #>
 ######################################################################
 p6df::modules::java::external::brew() {
 
-  brew tap adoptopenjdk/openjdk
-  local ver
-  for ver in 8 9 10 11 12 13 14 15 16; do
-    brew install --cask adoptopenjdk/openjdk/adoptopenjdk${ver}
+  local v
+  for v in 8 11 17 19 20 21; do
+    brew install temurin${v} --cask
   done
+  
+  brew install maven
+  # brew install maven-completion
+  # brew install maven-shell
 
-  brew install temurin --cask
+  # XXX: this will not be used by maven but is a dep
+  brew uninstall openjdk
 
   p6_return_void
 }
@@ -78,11 +84,10 @@ p6df::modules::java::home::symlink() {
 ######################################################################
 p6df::modules::java::langs() {
 
-  p6_run_dir "/Library/Java/JavaVirtualMachines/" p6df::modules::java::langs::doit
-
   local latest_installed=$(p6df::modules::java::jenv::latest::installed)
   jenv global $latest_installed
   jenv rehash
+
 
   local plugins
   local plugin
@@ -105,45 +110,7 @@ p6df::modules::java::langs() {
 ######################################################################
 p6df::modules::java::jenv::latest::installed() {
 
-  jenv versions | p6_filter_exclude "openjdk" | sed -e 's, (.*,,' -e 's,\*,,' | p6_filter_last "1" | p6_filter_spaces_strip
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::java::langs::doit()
-#
-#  Environment:	 XXX
-#>
-######################################################################
-p6df::modules::java::langs::doit() {
-
-  local d
-  for d in *; do
-    p6_run_dir "$d" p6df::modules::java::langs::jenv::add
-  done
-
-  # XXX: These use the base brew java
-  #  maven wrapper
-  #  brew install maven
-  #  brew install maven-completion
-  #  brew install maven-shell
-
-  p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::java::langs::jenv::add()
-#
-#>
-######################################################################
-p6df::modules::java::langs::jenv::add() {
-
-  jenv add ./Contents/Home
-
-  p6_return_void
+  jenv versions | p6_filter_exclude "temurin" | sed -e 's, (.*,,' -e 's,\*,,' | p6_filter_last "1" | p6_filter_spaces_strip
 }
 
 ######################################################################
