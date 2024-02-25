@@ -50,8 +50,6 @@
 - p6df::modules::java::init()
 - p6df::modules::java::jenv::latest::installed()
 - p6df::modules::java::langs()
-- p6df::modules::java::langs::doit()
-- p6df::modules::java::langs::jenv::add()
 - p6df::modules::java::vscodes()
 - str str = p6df::modules::j::env::prompt::info()
 
