@@ -48,13 +48,13 @@ p6df::modules::java::external::brew() {
   for v in 8 11 17 19 20 21; do
     brew install temurin${v} --cask
   done
-  
+
   brew install maven
   # brew install maven-completion
   # brew install maven-shell
 
   # XXX: this will not be used by maven but is a dep
-  brew uninstall openjdk
+  brew uninstall --ignore-dependencies openjdk
 
   p6_return_void
 }
@@ -87,7 +87,6 @@ p6df::modules::java::langs() {
   local latest_installed=$(p6df::modules::java::jenv::latest::installed)
   jenv global $latest_installed
   jenv rehash
-
 
   local plugins
   local plugin
