@@ -46,12 +46,12 @@ p6df::modules::java::external::brew() {
 
   local v
   for v in 8 11 17 19 20 21; do
-    brew install temurin${v} --cask
+    p6df::modules::homebrew::cli::brew::install temurin${v} --cask
   done
 
-  brew install maven
-  # brew install maven-completion
-  # brew install maven-shell
+  p6df::modules::homebrew::cli::brew::install maven
+  # p6df::modules::homebrew::cli::brew::install maven-completion
+  # p6df::modules::homebrew::cli::brew::install maven-shell
 
   # XXX: this will not be used by maven but is a dep
   brew uninstall --ignore-dependencies openjdk
@@ -103,24 +103,20 @@ p6df::modules::java::langs() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::java::jenv::latest::installed()
+# Function: p6df::modules::java::init(_module, dir)
 #
-#>
-######################################################################
-p6df::modules::java::jenv::latest::installed() {
-
-  jenv versions | p6_filter_exclude "temurin" | sed -e 's, (.*,,' -e 's,\*,,' | p6_filter_last "1" | p6_filter_spaces_strip
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::java::init()
+#  Args:
+#	_module -
+#	dir -
 #
 #  Environment:	 P6_DFZ_SRC_DIR
 #>
 ######################################################################
 p6df::modules::java::init() {
+  local _module="$1"
+  local dir="$2"
+
+  p6_bootstrap "$dir"
 
   p6df::core::lang::mgr::init "$P6_DFZ_SRC_DIR/gcuisinier/jenv" "j"
 
