@@ -46,15 +46,12 @@ p6df::modules::java::external::brew() {
 
   local v
   for v in 8 11 17 19 20 21; do
-    p6df::modules::homebrew::cli::brew::install temurin${v} --cask
+    p6df::modules::homebrew::cli::brew::install temurin@${v} --cask
   done
 
   p6df::modules::homebrew::cli::brew::install maven
   # p6df::modules::homebrew::cli::brew::install maven-completion
   # p6df::modules::homebrew::cli::brew::install maven-shell
-
-  # XXX: this will not be used by maven but is a dep
-  brew uninstall --ignore-dependencies openjdk
 
   p6_return_void
 }
