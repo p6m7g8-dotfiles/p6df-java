@@ -47,6 +47,7 @@ p6df::modules::java::external::brew() {
   local v
   for v in 8 11 17 19 20 21; do
     p6df::modules::homebrew::cli::brew::install temurin@${v} --cask
+    jenv add /Library/Java/JavaVirtualMachines/temurin-${v}.jdk/Contents/Home
   done
 
   p6df::modules::homebrew::cli::brew::install maven
