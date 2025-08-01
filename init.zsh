@@ -45,10 +45,12 @@ p6df::modules::java::vscodes() {
 p6df::modules::java::external::brew() {
 
   local v
-  for v in 8 11 17 19 20 21; do
+  for v in 8 11 17 21; do
     p6df::modules::homebrew::cli::brew::install temurin@${v} --cask
     jenv add /Library/Java/JavaVirtualMachines/temurin-${v}.jdk/Contents/Home
   done
+  p6df::modules::homebrew::cli::brew::install temurin --cask
+  jenv add /Library/Java/JavaVirtualMachines/temurin-24.jdk/Contents/Home
 
   p6df::modules::homebrew::cli::brew::install maven
   # p6df::modules::homebrew::cli::brew::install maven-completion
