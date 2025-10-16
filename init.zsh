@@ -39,7 +39,6 @@ p6df::modules::java::vscodes() {
 #
 # Function: p6df::modules::java::external::brew()
 #
-#  Environment:	 XXX
 #>
 ######################################################################
 p6df::modules::java::external::brew() {
