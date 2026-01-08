@@ -10,7 +10,6 @@ p6df::modules::java::deps() {
   ModuleDeps=(
     p6m7g8-dotfiles/p6common
     gcuisinier/jenv
-    ohmyzsh/ohmyzsh:plugins/mvn
   )
 }
 
@@ -27,7 +26,6 @@ p6df::modules::java::vscodes() {
   code --install-extension redhat.java
   code --install-extension vscjava.vscode-java-debug
   code --install-extension vscjava.vscode-java-dependency
-  code --install-extension vscjava.vscode-java-pack
   code --install-extension vscjava.vscode-java-test
   code --install-extension vscjava.vscode-maven
 
