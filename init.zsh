@@ -88,7 +88,7 @@ p6df::modules::java::langs() {
   local plugins
   local plugin
   plugins=$(p6_dir_list "$P6_DFZ_SRC_DIR/gcuisinier/jenv/available-plugins")
-  for plugin in $(p6_echo $plugins); do
+  for plugin in $(p6_echo "$plugins"); do
     jenv enable-plugin "$plugin"
   done
 
