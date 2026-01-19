@@ -142,7 +142,10 @@ p6df::modules::java::prompt::env() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::java::prompt::lang()
+# Function: str str = p6df::modules::java::prompt::lang()
+#
+#  Returns:
+#	str - str
 #
 #>
 ######################################################################
