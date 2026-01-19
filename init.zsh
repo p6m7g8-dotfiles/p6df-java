@@ -153,11 +153,13 @@ p6df::modules::java::prompt::lang() {
   local ver_mgr
   ver_mgr=$(jenv version-name 2>/dev/null)
   if p6_string_eq "$ver_mgr" "system"; then
-    local ver_sys="sys@"
+    local ver_sys
     local v
     v=$(java -version 2>&1 | grep Environment | sed -e 's,.*(build ,,' -e 's,).*,,')
     if p6_string_blank "$v"; then
       ver_sys="sys:no"
+    else
+      ver_sys="sys@$v"
     fi
     ver="$ver_sys"
   else
