@@ -82,14 +82,14 @@ p6df::modules::java::home::symlink() {
 p6df::modules::java::langs() {
 
   local latest_installed=$(p6df::modules::java::jenv::latest::installed)
-  jenv global $latest_installed
+  jenv global "$latest_installed"
   jenv rehash
 
   local plugins
   local plugin
   plugins=$(p6_dir_list "$P6_DFZ_SRC_DIR/gcuisinier/jenv/available-plugins")
-  for plugin in $(p6_echo $plugins); do
-    jenv enable-plugin $plugin
+  for plugin in $(p6_echo "$plugins"); do
+    jenv enable-plugin "$plugin"
   done
 
   jenv rehash
@@ -123,18 +123,50 @@ p6df::modules::java::init() {
 ######################################################################
 #<
 #
-# Function: str str = p6df::modules::j::env::prompt::info()
+# Function: str str = p6df::modules::java::prompt::env()
 #
 #  Returns:
 #	str - str
 #
-#  Environment:	 JAVA_HOME JENV_ROOT
+#  Environment:	 JAVA_HOME
 #>
 ######################################################################
-p6df::modules::j::env::prompt::info() {
+p6df::modules::java::prompt::env() {
 
-  local str="jenv_root:\t  $JENV_ROOT
-java_home:\t  $JAVA_HOME"
+#  local str="jenv_root:\t  $JENV_ROOT
+  local str="java_home:\t  $JAVA_HOME"
 
   p6_return_str "$str"
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::java::prompt::lang()
+#
+#>
+######################################################################
+p6df::modules::java::prompt::lang() {
+
+  local ver
+
+  local ver_mgr
+  ver_mgr=$(jenv version-name 2>/dev/null)
+  if p6_string_eq "$ver_mgr" "system"; then
+    local ver_sys
+    local v
+    v=$(java -version 2>&1 | grep Environment | sed -e 's,.*(build ,,' -e 's,).*,,')
+    if p6_string_blank "$v"; then
+      ver_sys="sys:no"
+    else
+      ver_sys="sys@$v"
+    fi
+    ver="$ver_sys"
+  else
+    ver="$ver_mgr"
+  fi
+
+  local str="j:$ver"
+
+  p6_return "$str"
 }
