@@ -43,15 +43,15 @@ p6df::modules::java::external::brew() {
 
   local v
   for v in 8 11 17 21; do
-    p6df::modules::homebrew::cli::brew::install temurin@${v} --cask
+    p6df::core::homebrew::cli::brew::install temurin@${v} --cask
     jenv add /Library/Java/JavaVirtualMachines/temurin-${v}.jdk/Contents/Home
   done
-  p6df::modules::homebrew::cli::brew::install temurin --cask
+  p6df::core::homebrew::cli::brew::install temurin --cask
   jenv add /Library/Java/JavaVirtualMachines/temurin-24.jdk/Contents/Home
 
-  p6df::modules::homebrew::cli::brew::install maven
-  # p6df::modules::homebrew::cli::brew::install maven-completion
-  # p6df::modules::homebrew::cli::brew::install maven-shell
+  p6df::core::homebrew::cli::brew::install maven
+  # p6df::core::homebrew::cli::brew::install maven-completion
+  # p6df::core::homebrew::cli::brew::install maven-shell
 
   p6_return_void
 }
