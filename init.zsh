@@ -155,7 +155,7 @@ p6df::modules::java::prompt::lang() {
   str=$(p6df::core::lang::prompt::lang \
     "j" \
     "jenv version-name 2>/dev/null" \
-    "java -version 2>&1 | grep Environment | sed -e 's,.*(build ,,' -e 's,).*,,'")
+    "java -version 2>&1 | p6_filter_row_select 'Environment' | p6_filter_extract_between '(build ' ')'")
 
   p6_return_str "$str"
 }
