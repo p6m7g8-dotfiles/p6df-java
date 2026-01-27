@@ -22,12 +22,12 @@ p6df::modules::java::deps() {
 ######################################################################
 p6df::modules::java::vscodes() {
 
-  code --install-extension SonarSource.sonarlint-vscode
-  code --install-extension redhat.java
-  code --install-extension vscjava.vscode-java-debug
-  code --install-extension vscjava.vscode-java-dependency
-  code --install-extension vscjava.vscode-java-test
-  code --install-extension vscjava.vscode-maven
+  p6df::modules::vscode::extension::install SonarSource.sonarlint-vscode
+  p6df::modules::vscode::extension::install redhat.java
+  p6df::modules::vscode::extension::install vscjava.vscode-java-debug
+  p6df::modules::vscode::extension::install vscjava.vscode-java-dependency
+  p6df::modules::vscode::extension::install vscjava.vscode-java-test
+  p6df::modules::vscode::extension::install vscjava.vscode-maven
 
   p6_return_void
 }
