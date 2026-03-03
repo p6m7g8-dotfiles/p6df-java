@@ -40,8 +40,8 @@ TODO: Add a short summary of this module.
 - `p6df::modules::java::home::symlink()`
 - `p6df::modules::java::init(_module, dir)`
   - Args:
-    - _module - 
-    - dir - 
+    - _module -
+    - dir -
 - `p6df::modules::java::langs()`
 - `p6df::modules::java::vscodes()`
 - `str str = p6df::modules::java::prompt::env()`
