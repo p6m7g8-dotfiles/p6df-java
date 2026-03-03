@@ -66,7 +66,7 @@ p6df::modules::java::external::brew() {
 ######################################################################
 p6df::modules::java::home::symlink() {
 
-  p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-java/share/.sonarlint" ".sonarlint"
+  p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-java/share/.sonarlint" "$HOME/.sonarlint"
 
   p6_return_void
 }
