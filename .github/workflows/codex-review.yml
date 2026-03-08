@@ -1,4 +1,4 @@
-name: Claude Code Review
+name: Codex Code Review
 on:
   pull_request:
     types: [opened, ready_for_review, synchronize]
@@ -10,15 +10,15 @@ permissions:
   pull-requests: write
 
 jobs:
-  claude-review:
+  codex-review:
     runs-on: ubuntu-latest
     steps:
       - name: Skip on merge queue
         if: github.event_name == 'merge_group'
         run: echo "Skipping review in merge queue context"
-      - name: Run claude review
-        if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
+      - name: Run codex review
+        if: github.event_name == 'pull_request' && github.event.pull_request.draft == false && github.event.pull_request.head.repo.fork == false
         continue-on-error: true
-        uses: p6m7g8-actions/claude@main
+        uses: p6m7g8-actions/codex@main
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
