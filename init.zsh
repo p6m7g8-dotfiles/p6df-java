@@ -134,7 +134,9 @@ p6df::modules::java::init() {
 p6df::modules::java::prompt::env() {
 
 #  local str="jenv_root:\t  $JENV_ROOT
-  local str="java_home:\t  $JAVA_HOME"
+#  local str="java_home:\t  $JAVA_HOME"
+
+  local str=""
 
   p6_return_str "$str"
 }
