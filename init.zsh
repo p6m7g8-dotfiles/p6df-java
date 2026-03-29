@@ -35,11 +35,11 @@ p6df::modules::java::vscodes() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::java::external::brew()
+# Function: p6df::modules::java::external::brews()
 #
 #>
 ######################################################################
-p6df::modules::java::external::brew() {
+p6df::modules::java::external::brews() {
 
   local v
   for v in 8 11 17 21; do
