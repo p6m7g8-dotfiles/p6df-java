@@ -59,12 +59,12 @@ p6df::modules::java::external::brews() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::java::home::symlink()
+# Function: p6df::modules::java::home::symlinks()
 #
 #  Environment:	 P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
 ######################################################################
-p6df::modules::java::home::symlink() {
+p6df::modules::java::home::symlinks() {
 
   p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-java/share/.sonarlint" "$HOME/.sonarlint"
 
