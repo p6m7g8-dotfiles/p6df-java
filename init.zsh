@@ -61,7 +61,7 @@ p6df::modules::java::external::brews() {
 #
 # Function: p6df::modules::java::home::symlinks()
 #
-#  Environment:	 P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
+#  Environment:	 HOME P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
 ######################################################################
 p6df::modules::java::home::symlinks() {
@@ -100,45 +100,16 @@ p6df::modules::java::langs() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::java::init(_module, dir)
-#
-#  Args:
-#	_module -
-#	dir -
+# Function: p6df::modules::java::langmgr::init()
 #
 #  Environment:	 P6_DFZ_SRC_DIR
 #>
 ######################################################################
-p6df::modules::java::init() {
-  local _module="$1"
-  local dir="$2"
-
-  p6_bootstrap "$dir"
+p6df::modules::java::langmgr::init() {
 
   p6df::core::lang::mgr::init "$P6_DFZ_SRC_DIR/gcuisinier/jenv" "j"
 
   p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: str str = p6df::modules::java::prompt::env()
-#
-#  Returns:
-#	str - str
-#
-#  Environment:	 JAVA_HOME
-#>
-######################################################################
-p6df::modules::java::prompt::env() {
-
-#  local str="jenv_root:\t  $JENV_ROOT
-#  local str="java_home:\t  $JAVA_HOME"
-
-  local str=""
-
-  p6_return_str "$str"
 }
 
 ######################################################################
@@ -160,4 +131,20 @@ p6df::modules::java::prompt::lang() {
     "java -version 2>&1 | p6_filter_row_select 'Environment' | p6_filter_extract_between '(build ' ')'")
 
   p6_return_str "$str"
+}
+
+######################################################################
+#<
+#
+# Function: words java $JAVA_HOME = p6df::modules::java::prompt::env()
+#
+#  Returns:
+#	words - java $JAVA_HOME
+#
+#  Environment:	 JAVA_HOME
+#>
+######################################################################
+p6df::modules::java::prompt::env() {
+
+  p6_return_words 'java' '$JAVA_HOME'
 }
