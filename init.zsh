@@ -146,5 +146,5 @@ p6df::modules::java::prompt::lang() {
 ######################################################################
 p6df::modules::java::prompt::env() {
 
-  p6_return_words 'java' '$JAVA_HOME'
+  p6_return_words 'java' "$"
 }
