@@ -16,18 +16,29 @@ p6df::modules::java::deps() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::java::vscodes()
+# Function: p6df::modules::java::langmgr::init()
 #
+#  Environment:	 P6_DFZ_SRC_DIR
 #>
 ######################################################################
-p6df::modules::java::vscodes() {
+p6df::modules::java::langmgr::init() {
 
-  p6df::modules::vscode::extension::install SonarSource.sonarlint-vscode
-  p6df::modules::vscode::extension::install redhat.java
-  p6df::modules::vscode::extension::install vscjava.vscode-java-debug
-  p6df::modules::vscode::extension::install vscjava.vscode-java-dependency
-  p6df::modules::vscode::extension::install vscjava.vscode-java-test
-  p6df::modules::vscode::extension::install vscjava.vscode-maven
+  p6df::core::lang::mgr::init "$P6_DFZ_SRC_DIR/gcuisinier/jenv" "j"
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::java::home::symlinks()
+#
+#  Environment:	 HOME P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
+#>
+######################################################################
+p6df::modules::java::home::symlinks() {
+
+  p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-java/share/.sonarlint" "$HOME/.sonarlint"
 
   p6_return_void
 }
@@ -52,21 +63,6 @@ p6df::modules::java::external::brews() {
   p6df::core::homebrew::cli::brew::install maven
   # p6df::core::homebrew::cli::brew::install maven-completion
   # p6df::core::homebrew::cli::brew::install maven-shell
-
-  p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::java::home::symlinks()
-#
-#  Environment:	 HOME P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
-#>
-######################################################################
-p6df::modules::java::home::symlinks() {
-
-  p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-java/share/.sonarlint" "$HOME/.sonarlint"
 
   p6_return_void
 }
@@ -100,14 +96,18 @@ p6df::modules::java::langs() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::java::langmgr::init()
+# Function: p6df::modules::java::vscodes()
 #
-#  Environment:	 P6_DFZ_SRC_DIR
 #>
 ######################################################################
-p6df::modules::java::langmgr::init() {
+p6df::modules::java::vscodes() {
 
-  p6df::core::lang::mgr::init "$P6_DFZ_SRC_DIR/gcuisinier/jenv" "j"
+  p6df::modules::vscode::extension::install SonarSource.sonarlint-vscode
+  p6df::modules::vscode::extension::install redhat.java
+  p6df::modules::vscode::extension::install vscjava.vscode-java-debug
+  p6df::modules::vscode::extension::install vscjava.vscode-java-dependency
+  p6df::modules::vscode::extension::install vscjava.vscode-java-test
+  p6df::modules::vscode::extension::install vscjava.vscode-maven
 
   p6_return_void
 }
