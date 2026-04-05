@@ -36,16 +36,13 @@ TODO: Add a short summary of this module.
 ##### p6df-java/init.zsh
 
 - `p6df::modules::java::deps()`
-- `p6df::modules::java::external::brew()`
-- `p6df::modules::java::home::symlink()`
-- `p6df::modules::java::init(_module, dir)`
-  - Args:
-    - _module -
-    - dir -
+- `p6df::modules::java::external::brews()`
+- `p6df::modules::java::home::symlinks()`
+- `p6df::modules::java::langmgr::init()`
 - `p6df::modules::java::langs()`
 - `p6df::modules::java::vscodes()`
-- `str str = p6df::modules::java::prompt::env()`
 - `str str = p6df::modules::java::prompt::lang()`
+- `words java = p6df::modules::java::prompt::env()`
 
 #### p6df-java/lib
 
