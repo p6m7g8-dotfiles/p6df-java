@@ -1,5 +1,11 @@
 # shellcheck shell=bash
 ######################################################################
+#<
+#
+# Function: p6df::modules::java::deps()
+#
+#>
+######################################################################
 p6df::modules::java::deps() {
   ModuleDeps=(
     p6m7g8-dotfiles/p6common
@@ -7,6 +13,13 @@ p6df::modules::java::deps() {
   )
 }
 
+######################################################################
+#<
+#
+# Function: p6df::modules::java::langmgr::init()
+#
+#  Environment:	 P6_DFZ_SRC_DIR
+#>
 ######################################################################
 p6df::modules::java::langmgr::init() {
 
@@ -16,6 +29,13 @@ p6df::modules::java::langmgr::init() {
 }
 
 ######################################################################
+#<
+#
+# Function: p6df::modules::java::home::symlinks()
+#
+#  Environment:	 HOME P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
+#>
+######################################################################
 p6df::modules::java::home::symlinks() {
 
   p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-java/share/.sonarlint" "$HOME/.sonarlint"
@@ -23,6 +43,12 @@ p6df::modules::java::home::symlinks() {
   p6_return_void
 }
 
+######################################################################
+#<
+#
+# Function: p6df::modules::java::external::brews()
+#
+#>
 ######################################################################
 p6df::modules::java::external::brews() {
 
@@ -41,6 +67,13 @@ p6df::modules::java::external::brews() {
   p6_return_void
 }
 
+######################################################################
+#<
+#
+# Function: p6df::modules::java::langs()
+#
+#  Environment:	 P6_DFZ_SRC_DIR
+#>
 ######################################################################
 p6df::modules::java::langs() {
 
@@ -61,6 +94,12 @@ p6df::modules::java::langs() {
 }
 
 ######################################################################
+#<
+#
+# Function: p6df::modules::java::vscodes()
+#
+#>
+######################################################################
 p6df::modules::java::vscodes() {
 
   p6df::modules::vscode::extension::install SonarSource.sonarlint-vscode
@@ -73,45 +112,6 @@ p6df::modules::java::vscodes() {
   p6_return_void
 }
 
-######################################################################
-#<
-#
-# Function: p6df::modules::java::deps()
-#
-#>
-######################################################################
-#<
-#
-# Function: p6df::modules::java::vscodes()
-#
-#>
-######################################################################
-#<
-#
-# Function: p6df::modules::java::external::brews()
-#
-#>
-######################################################################
-#<
-#
-# Function: p6df::modules::java::home::symlinks()
-#
-#  Environment:	 HOME P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
-#>
-######################################################################
-#<
-#
-# Function: p6df::modules::java::langs()
-#
-#  Environment:	 P6_DFZ_SRC_DIR
-#>
-######################################################################
-#<
-#
-# Function: p6df::modules::java::langmgr::init()
-#
-#  Environment:	 P6_DFZ_SRC_DIR
-#>
 ######################################################################
 #<
 #
