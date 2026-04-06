@@ -136,12 +136,12 @@ p6df::modules::java::prompt::lang() {
 ######################################################################
 #<
 #
-# Function: words java $JAVA_HOME = p6df::modules::java::prompt::env()
+# Function: words java = p6df::modules::java::prompt::env()
 #
 #  Returns:
-#	words - java $JAVA_HOME
+#	words - java
 #
-#  Environment:	 JAVA_HOME
+#  Environment:	 JAVA_HOME JENV_ROOT
 #>
 ######################################################################
 p6df::modules::java::prompt::env() {
